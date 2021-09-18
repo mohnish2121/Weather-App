@@ -10,8 +10,8 @@ window.addEventListener("load",()=>{
         navigator.geolocation.getCurrentPosition((position)=> {
             lat = position.coords.latitude;
             long = position.coords.longitude;
-
-            const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly,alerts&appid=0060f3ef95bed731ec4f633ed5beaa5e`;
+            let mykey = config.MY_KEY;
+            const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly,alerts&appid=${mykey}`;
 
             fetch(api).then((data) =>{
                 return data.json();
