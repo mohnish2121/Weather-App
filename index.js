@@ -65,7 +65,7 @@ let clickevent = document.getElementById("submit-btn");
 clickevent.addEventListener("click", ()=> {
     let cityname = document.getElementById("input").value;
  
-    const mykey = config.MY_KEY;
+    const mykey = '0060f3ef95bed731ec4f633ed5beaa5e';
     const api = `https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=${mykey}`;
     
     fetch(api).then((data) => {
@@ -148,7 +148,7 @@ newsbutton.addEventListener("click", () => {
 
 // fetching news and pushing in the news section
 function newsapiCall(){
-    const newsKey = config.NEWS_KEY;
+    const newsKey = '2d381cb35897a0170f400009211b1324';
     const newsapi =  `http://api.mediastack.com/v1/news?access_key=${newsKey}&countries=in&keywords=corona`;
     
     fetch(newsapi).then((data) =>{
