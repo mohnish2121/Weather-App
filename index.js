@@ -61,6 +61,7 @@
     
 // });
 let clickevent = document.getElementById("submit-btn");
+
 clickevent.addEventListener("click", ()=> {
     let cityname = document.getElementById("input").value;
  
@@ -120,6 +121,13 @@ clickevent.addEventListener("click", ()=> {
     }
 
 });
+//triger the button click event by enter key press
+let searchbar = document.getElementById("input");
+searchbar.addEventListener("keyup", function(event){
+    if(event.key == "Enter"){
+        clickevent.click();
+    }
+});
 
 // slide news section on clickevent
 let newsbutton = document.getElementById("news-toggle-button");
@@ -141,15 +149,17 @@ newsbutton.addEventListener("click", () => {
 // fetching news and pushing in the news section
 function newsapiCall(){
     const newsKey = config.NEWS_KEY;
-    const newsapi =  `https://newsapi.org/v2/top-headlines?country=in&apiKey=${newsKey}`;
+    const newsapi =  `http://api.mediastack.com/v1/news?access_key=${newsKey}&countries=in&keywords=corona`;
     
     fetch(newsapi).then((data) =>{
         return data.json();
     }).then((parsedData) =>{
         console.log(parsedData);
-        for(let i = 0;i<=7;i++){
-            let image = parsedData.articles[i].urlToImage;
-            let title = parsedData.articles[i].title;
+        let totalresults = parsedData.pagination.total;
+        console.log(totalresults);
+        for(let i = 0;i<totalresults;i++){
+            let image = parsedData.data[i].image;
+            let title = parsedData.data[i].title;
             pushNews(image,title);
         }
     });
@@ -158,14 +168,18 @@ function pushNews(image,title){
     let container = document.getElementById("news");
 
     let newsCardDiv = document.createElement("div");
-    
-    let imageEle = document.createElement("img");
-    imageEle.setAttribute("src",image);
-    imageEle.setAttribute("width","100%");
-    newsCardDiv.append(imageEle);
+    if(image != null){
+        let imageEle = document.createElement("img");
+        imageEle.setAttribute("src",image);
+        imageEle.setAttribute("width","100%");
+        newsCardDiv.append(imageEle);
+    }
 
     let titleEle = document.createElement("p");
     titleEle.innerHTML = title;
+    newsCardDiv.style.padding = "2rem 0";
+    newsCardDiv.style.border = "1px solid white";
+    newsCardDiv.style.borderRadius = "5px";
     newsCardDiv.append(titleEle);
 
     container.append(newsCardDiv);

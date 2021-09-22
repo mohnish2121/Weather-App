@@ -17,6 +17,7 @@ body{
     min-width:360px;
     display: flex;
     justify-content: space-between;
+    
 }
 
 #main {
@@ -145,14 +146,19 @@ body{
 
 #news-section #news{
     width:300px;
-    height:100vh;
-    background-color: bisque;
-    color:black;
+    min-height: 3000px;
+    height: 100vh;
+    background-color: rgba(31, 30, 30, 0.966);
+    color:white;
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
-    overflow: auto;
+    overflow:auto;
     padding:0.5rem;
  
     
 }
+#news-section #news::-webkit-scrollbar {
+    width:0 !important;
+    display: none;
+  }
